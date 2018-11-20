@@ -14,6 +14,8 @@ RUN echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/a
 
 RUN set -x; \
     apt-get update \
+    && wget "http://ftp.se.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb" \
+    && dpkg -i libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb \
     && apt-get install -y --no-install-recommends \
         locales \
         gettext \
@@ -61,6 +63,7 @@ ENV LANG en_US.UTF-8
 ENV LC_TYPE en_US.UTF-8
 
 ENV TAIGA_SSL False
+ENV TAIGA_SSL_BY_REVERSE_PROXY False
 ENV TAIGA_ENABLE_EMAIL False
 ENV TAIGA_HOSTNAME localhost
 ENV TAIGA_SECRET_KEY "!!!REPLACE-ME-j1598u1J^U*(y251u98u51u5981urf98u2o5uvoiiuzhlit3)!!!"
