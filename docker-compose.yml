@@ -3,6 +3,8 @@ version: '2'
 services:
   taiga:
     image: 'neonigma/taiga_openshift'
+    labels:
+      kompose.volume.size: 1Gi
     build: .
     ports:
       - 80:80
@@ -53,6 +55,8 @@ services:
       POSTGRES_USER: postgres
     ports:
       - 5432
+    labels:
+      kompose.volume.size: 1Gi
     volumes:
       # this helps prevent your postgres data from deleted
       - ./pgdata:/var/lib/postgresql/data
