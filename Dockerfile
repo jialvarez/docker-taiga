@@ -4,24 +4,23 @@ MAINTAINER Benjamin Hutchins <ben@hutchins.co>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Version of Nginx to install
-ENV NGINX_VERSION 1.9.7-1~jessie
+ENV NGINX_VERSION "1.9.7-1~jessie"
 
 RUN apt-key adv \
-  --keyserver hkp://pgp.mit.edu:80 \
-  --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
+  --keyserver keyserver.ubuntu.com \
+  --recv-keys 379CE192D401AB61
 
 RUN echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list
 
-RUN set -x; \
-    apt-get update \
-    && wget "http://ftp.se.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb" \
-    && dpkg -i libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb \
-    && apt-get install -y --no-install-recommends \
-        locales \
-        gettext \
-        ca-certificates \
-        nginx=${NGINX_VERSION} \
-    && rm -rf /var/lib/apt/lists/*
+RUN set -x;
+RUN apt-get update 
+RUN wget "http://ftp.se.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb"
+RUN dpkg -i libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb
+RUN apt-get install -y --no-install-recommends locales
+RUN apt-get install -y --no-install-recommends gettext
+RUN apt-get install -y --no-install-recommends ca-certificates
+RUN apt-get install -y --no-install-recommends --allow-unauthenticated nginx=${NGINX_VERSION}
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
 
