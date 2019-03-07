@@ -19,7 +19,7 @@ services:
     volumes:
       # I recommend specifying a volume that maps to taiga's media,
       # this way uploaded files are not lost during upgrades of the taiga image
-      - media:/usr/src/taiga-back/media
+      - ./media:/usr/src/taiga-back/media
 
       # If you'd like to store the configuration outside of the container,
       # uncomment this volume. This allows for easy changes to the configuration.
@@ -65,7 +65,7 @@ services:
     labels:
       kompose.volume.size: 1Gi
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
 
   # To enable taiga-events, uncomment the following lines:
   #rabbit:
