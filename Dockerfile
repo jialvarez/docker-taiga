@@ -32,9 +32,8 @@ COPY taiga-front-dist/ /usr/src/taiga-front-dist
 COPY docker-settings.py /usr/src/taiga-back/settings/docker.py
 COPY conf/locale.gen /etc/locale.gen
 COPY conf/nginx/nginx.conf /etc/nginx/nginx.conf
-# To get taiga-events working, uncomment this and comment next line
-#COPY conf/nginx/taiga-events.conf /etc/nginx/conf.d/default.conf
-COPY conf/nginx/taiga.conf /etc/nginx/conf.d/default.conf
+COPY conf/nginx/taiga-events.conf /etc/nginx/conf.d/default.conf
+#COPY conf/nginx/taiga.conf /etc/nginx/conf.d/default.conf
 COPY conf/nginx/ssl.conf /etc/nginx/ssl.conf
 COPY conf/nginx/taiga-events.conf /etc/nginx/taiga-events.conf
 
@@ -84,7 +83,7 @@ ENV TAIGA_HOSTNAME localhost
 ENV TAIGA_SECRET_KEY "!!!REPLACE-ME-j1598u1J^U*(y251u98u51u5981urf98u2o5uvoiiuzhlit3)!!!"
 
 # Uncoment this in order to get taiga-events working
-#ENV RABBIT_PORT_5672_TCP_ADDR "amqp://guest:guest@rabbit:5672//"
+ENV RABBIT_PORT_5672_TCP_ADDR "amqp://guest:guest@rabbit:5672//"
 
 RUN python manage.py collectstatic --noinput
 

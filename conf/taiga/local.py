@@ -19,6 +19,6 @@ TEMPLATE_DEBUG = False
 INSTALLED_APPS += ["taiga_contrib_slack"]
 
 # uncomment this to get taiga-events working
-#EVENTS_PUSH_BACKEND = "taiga.events.backends.rabbitmq.EventsPushBackend"
-#EVENTS_PUSH_BACKEND_OPTIONS = {"url": "amqp://guest:guest@rabbit:5672//"}
-#SECRET_KEY = "mysecret"
+EVENTS_PUSH_BACKEND = "taiga.events.backends.rabbitmq.EventsPushBackend"
+EVENTS_PUSH_BACKEND_OPTIONS = {"url": "amqp://guest:guest@rabbit:5672//"}
+SECRET_KEY = "mysecret"

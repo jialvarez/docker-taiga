@@ -12,10 +12,10 @@ services:
     depends_on:
       - postgres-taiga
       # uncomment this to use taiga-events
-      #- rabbit
-      #- redis 
-      #- celery 
-      #- events
+      - rabbit
+      - redis 
+      - celery 
+      - events
     volumes:
       # I recommend specifying a volume that maps to taiga's media,
       # this way uploaded files are not lost during upgrades of the taiga image
@@ -68,20 +68,20 @@ services:
       - ./pgdata:/var/lib/postgresql/data
 
   # To enable taiga-events, uncomment the following lines:
-  #rabbit:
-  #  image: rabbitmq:3
-  #  hostname: rabbit
-  #
-  #redis:
-  #  image: redis:3
-  #
-  #celery:
-  #  image: celery
-  #  links:
-  #    - rabbit
-  #
-  #events:
-  #  image: benhutchins/taiga-events
-  #  links:
-  #    - rabbit
+  rabbit:
+    image: rabbitmq:3
+    hostname: rabbit
+  
+  redis:
+    image: redis:3
+  
+  celery:
+    image: celery
+    links:
+      - rabbit
+  
+  events:
+    image: benhutchins/taiga-events
+    links:
+      - rabbit
   
