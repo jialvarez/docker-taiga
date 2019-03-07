@@ -47,9 +47,9 @@ If you want to remove pods, deployments, and volumes generated, you should type:
 ```kubectl apply -f templates/```
 
 ## Deploy Taiga in Docker containers
-You should change to the docker-compose branch:
-```git checkout docker-compose```
-or
+You should change to the docker-compose branch:<br/>
+```git checkout docker-compose```<br/>
+or<br/>
 ```git checkout docker-compose-events```
 
 if you want to give a try to Taiga Events.
