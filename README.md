@@ -46,7 +46,7 @@ If you want to remove pods, deployments, and volumes generated, you should type:
 4. Apply them<br/>
 ```kubectl apply -f templates/```
 
-## Deploy Odoo in Docker containers
+## Deploy Taiga in Docker containers
 You should change to the docker-compose branch:
 ```git checkout docker-compose```
 or
