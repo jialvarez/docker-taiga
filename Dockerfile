@@ -103,22 +103,22 @@ COPY checkdb.py /checkdb.py
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 ## OPTIONAL: If you want to store database backups every day
-ENV PGPASSWORD="password"
-
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" >>  /etc/apt/sources.list.d/pgdg.list
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-RUN apt-get update 
-RUN apt-get install -y --no-install-recommends postgresql-client rsync
-
-ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.8/supercronic-linux-amd64 \
-    SUPERCRONIC=supercronic-linux-amd64 \
-    SUPERCRONIC_SHA1SUM=be43e64c45acd6ec4fce5831e03759c89676a0ea
-
-RUN curl -fsSLO "$SUPERCRONIC_URL" \
- && echo "${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}" | sha1sum -c - \
- && chmod +x "$SUPERCRONIC" \
- && mv "$SUPERCRONIC" "/usr/local/bin/${SUPERCRONIC}" \
- && ln -s "/usr/local/bin/${SUPERCRONIC}" /usr/local/bin/supercronic
+#ENV PGPASSWORD="password"
+#
+#RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" >>  /etc/apt/sources.list.d/pgdg.list
+#RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+#RUN apt-get update 
+#RUN apt-get install -y --no-install-recommends postgresql-client rsync
+#
+#ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.8/supercronic-linux-amd64 \
+#    SUPERCRONIC=supercronic-linux-amd64 \
+#    SUPERCRONIC_SHA1SUM=be43e64c45acd6ec4fce5831e03759c89676a0ea
+#
+#RUN curl -fsSLO "$SUPERCRONIC_URL" \
+# && echo "${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}" | sha1sum -c - \
+# && chmod +x "$SUPERCRONIC" \
+# && mv "$SUPERCRONIC" "/usr/local/bin/${SUPERCRONIC}" \
+# && ln -s "/usr/local/bin/${SUPERCRONIC}" /usr/local/bin/supercronic
 
 # Create a non-root user
 # Use it only for OpenShift image
