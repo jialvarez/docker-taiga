@@ -13,3 +13,12 @@ from .docker import *
 PUBLIC_REGISTER_ENABLED = False
 DEBUG = False
 TEMPLATE_DEBUG = False
+
+## Slack
+# https://github.com/taigaio/taiga-contrib-slack
+INSTALLED_APPS += ["taiga_contrib_slack"]
+
+# uncomment this to get taiga-events working
+#EVENTS_PUSH_BACKEND = "taiga.events.backends.rabbitmq.EventsPushBackend"
+#EVENTS_PUSH_BACKEND_OPTIONS = {"url": "amqp://guest:guest@rabbit:5672//"}
+#SECRET_KEY = "mysecret"

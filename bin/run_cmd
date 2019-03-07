@@ -1,0 +1,4 @@
+#!/bin/bash
+# First command (database backup) is optional
+/usr/local/bin/supercronic /usr/src/cron/crontab 1> /usr/src/cron/crontab.log &
+python manage.py runserver 0.0.0.0:8000

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Sleep when asked to, to allow the database time to start
 # before Taiga tries to run /checkdb.py below.
 : ${TAIGA_SLEEP:=0}
@@ -55,9 +54,14 @@ elif grep -q "wss://" "/taiga/conf.json"; then
   sed -i "s/wss:\/\//ws:\/\//g" /taiga/conf.json
 fi
 
+
 # Start nginx service (need to start it as background process)
 # nginx -g "daemon off;"
 service nginx start
+
+if [ -w /etc/passwd ]; then
+  echo "${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin" >> /etc/passwd
+fi
 
 # Start Taiga backend Django server
 exec "$@"

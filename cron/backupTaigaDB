@@ -1,0 +1,6 @@
+#!/bin/bash
+set -x
+taigaBackupFile=/usr/src/cron/taiga-$(date '+%Y%m%d-%H%M%S').sql
+mediaBackupFile=/usr/src/cron/media-$(date '+%Y%m%d-%H%M%S').tar.gz
+pg_dump -v -h postgres-taiga -U postgres taigadb > $taigaBackupFile
+tar cvzf $mediaBackupFile /usr/src/taiga-back/media

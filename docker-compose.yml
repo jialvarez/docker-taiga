@@ -7,14 +7,19 @@ services:
       kompose.volume.size: 1Gi
     build: .
     ports:
-      - 80:80
+      - 8080:8080
       # - 443:443 # To enable SSL, uncomment this line
     depends_on:
-      - postgres
+      - postgres-taiga
+      # uncomment this to use taiga-events
+      #- rabbit
+      #- redis 
+      #- celery 
+      #- events
     volumes:
       # I recommend specifying a volume that maps to taiga's media,
       # this way uploaded files are not lost during upgrades of the taiga image
-      - ./media:/usr/src/taiga-back/media
+      - media:/usr/src/taiga-back/media
 
       # If you'd like to store the configuration outside of the container,
       # uncomment this volume. This allows for easy changes to the configuration.
@@ -24,13 +29,14 @@ services:
       # - ./ssl.key:/etc/nginx/ssl/ssl.key:ro # To enable SSL, uncomment this line
     environment:
       # Your hostname (REQUIRED)
-      TAIGA_HOSTNAME: localhost
+      TAIGA_HOSTNAME: taiga-toolsrs.e4ff.pro-eu-west-1.openshiftapps.com 
+      #TAIGA_HOSTNAME: 35.197.244.100:8080
 
       # Database settings
       # To use an external database, simply update these and remove the postgres
       # service from this docker-compose.yml file
       TAIGA_DB_NAME: taigadb
-      TAIGA_DB_HOST: postgres
+      TAIGA_DB_HOST: postgres-taiga
       TAIGA_DB_USER: postgres
       TAIGA_DB_PASSWORD: password
       TAIGA_SLEEP: 15 # when the db comes up from docker, it is usually too quick
@@ -47,16 +53,35 @@ services:
       # TAIGA_EMAIL_USER: me@gmail.com
       # TAIGA_EMAIL_PASS: super-secure-pass phrase thing!
 
-  postgres:
+  postgres-taiga:
     image: postgres
     environment:
       POSTGRES_DB: taigadb
       POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres
+      PGDATA: /var/lib/postgresql/data/db-files/
     ports:
       - 5432
     labels:
       kompose.volume.size: 1Gi
     volumes:
-      # this helps prevent your postgres data from deleted
-      - ./pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+
+  # To enable taiga-events, uncomment the following lines:
+  #rabbit:
+  #  image: rabbitmq:3
+  #  hostname: rabbit
+  #
+  #redis:
+  #  image: redis:3
+  #
+  #celery:
+  #  image: celery
+  #  links:
+  #    - rabbit
+  #
+  #events:
+  #  image: benhutchins/taiga-events
+  #  links:
+  #    - rabbit
+  
