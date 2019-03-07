@@ -59,9 +59,9 @@ fi
 # nginx -g "daemon off;"
 service nginx start
 
-if [ -w /etc/passwd ]; then
-  echo "${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin" >> /etc/passwd
-fi
+#if [ -w /etc/passwd ]; then
+#  echo "${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin" >> /etc/passwd
+#fi
 
 # Start Taiga backend Django server
 exec "$@"
