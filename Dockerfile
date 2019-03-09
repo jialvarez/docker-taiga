@@ -12,7 +12,7 @@ RUN apt-key adv \
   --keyserver keyserver.ubuntu.com \
   --recv-keys 379CE192D401AB61
 
-RUN echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list
+RUN echo "deb http://nginx.org/packages/mainline/debian/ stretch nginx" >> /etc/apt/sources.list
 
 RUN set -x;
 RUN apt-get update 
