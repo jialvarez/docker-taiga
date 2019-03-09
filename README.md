@@ -56,3 +56,7 @@ if you want to give a try to Taiga Events.
 
 And then just type:<br/>
 ```docker-compose up -d```
+
+## Screenshots
+![alt text](https://raw.githubusercontent.com/jialvarez/taiga_openshift/master/screenshots/001-taiga.png "Pods")
+![alt text](https://raw.githubusercontent.com/jialvarez/taiga_openshift/master/screenshots/002-taiga.png "Storage")
